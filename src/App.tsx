@@ -1,9 +1,12 @@
-import './App.css'
+import './App.css';
 
 export default function App() {
   return (
-    <main>
-      Ballistic Calculator Http 2.0
-    </main>
+    <div>
+      <main>
+        Ballistic Calculator
+      </main>
+      <h1>Create Load</h1>
+    </div>
   )
 }
