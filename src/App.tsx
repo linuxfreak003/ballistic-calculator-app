@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import TopBar from './TopBar';
 import ScenarioTable from './ScenarioTable';
 import LoadTable from './LoadTable';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('ScenarioTable');

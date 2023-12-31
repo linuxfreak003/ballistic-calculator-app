@@ -3,6 +3,7 @@ import Modal from 'react-modal';
 import {
   fetchScenarios,
   createScenario,
+  updateScenario,
   ListScenariosRequest,
   ListScenariosResponse,
   CreateScenarioRequest,
@@ -25,6 +26,7 @@ const ScenarioTable: React.FC = () => {
       loadId: 0,
     },
   });
+  const [selectedScenario, setSelectedScenario] = useState<Scenario | null>(null);
 
   useEffect(() => {
     fetchData();
@@ -49,6 +51,7 @@ const ScenarioTable: React.FC = () => {
   };
 
   const openModal = () => {
+    setSelectedScenario(null);
     setModalIsOpen(true);
   };
 
@@ -66,11 +69,28 @@ const ScenarioTable: React.FC = () => {
     });
   };
 
+  const handleUpdateClick = (scenario: Scenario) => {
+    setSelectedScenario(scenario);
+    setModalIsOpen(true);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      await createScenario(newCreateScenarioRequest);
+      if (selectedScenario) {
+        await updateScenario({
+          scenario: {
+            scenarioId: selectedScenario.scenarioId,
+            name: newCreateScenarioRequest.scenario.name,
+            environmentId: newCreateScenarioRequest.scenario.environmentId,
+            loadId: newCreateScenarioRequest.scenario.loadId,
+            rifleId: newCreateScenarioRequest.scenario.rifleId,
+          },
+        });
+      } else {
+        await createScenario(newCreateScenarioRequest);
+      }
       closeModal();
       fetchData();
       setError(null);
@@ -83,9 +103,9 @@ const ScenarioTable: React.FC = () => {
     <div>
       <button onClick={openModal}>Add Scenario</button>
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      {scenarios.length > 0 && <ScenarioTableBody scenarios={scenarios} />}
+      {scenarios.length > 0 && <ScenarioTableBody scenarios={scenarios} updateHandle={handleUpdateClick} />}
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2>Add Scenario</h2>
+        <h2>{selectedScenario ? 'Update Scenario' : 'Add Scenario'}</h2>
         <form onSubmit={handleSubmit}>
           <label>
             Name:
@@ -108,7 +128,7 @@ const ScenarioTable: React.FC = () => {
             LoadId:
             <input type="text" name="loadId" value={newCreateScenarioRequest.scenario.loadId} onChange={handleInputChange} />
           </label>
-          <button type="submit">Submit</button>
+          <button type="submit">Save</button>
         </form>
       </Modal>
     </div>

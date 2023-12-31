@@ -16,6 +16,9 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "node_modules/@fortawesome/fontawesome-free",
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

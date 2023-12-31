@@ -1,11 +1,14 @@
 import React from 'react';
 import { Scenario } from './scenario';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 interface ScenarioTableBodyProps {
   scenarios: Array<Scenario>;
+  updateHandle: any;
 }
 
-const ScenarioTableBody: React.FC<ScenarioTableBodyProps> = ({ scenarios }) => {
+const ScenarioTableBody: React.FC<ScenarioTableBodyProps> = ({ scenarios, updateHandle }) => {
   return (
     <table>
       <thead>
@@ -25,6 +28,9 @@ const ScenarioTableBody: React.FC<ScenarioTableBodyProps> = ({ scenarios }) => {
             <td>{item.environmentId}</td>
             <td>{item.rifleId}</td>
             <td>{item.loadId}</td>
+            <td>
+              <button onClick={() => updateHandle(item)}><FontAwesomeIcon icon={faEdit} /></button>
+            </td>
           </tr>
         ))}
       </tbody>
