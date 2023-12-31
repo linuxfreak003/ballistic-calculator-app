@@ -7,7 +7,7 @@ import {
   ListScenariosResponse,
   CreateScenarioRequest,
   Scenario,
-} from './api';
+} from './scenario';
 import ScenarioTableBody from "./ScenarioTableBody"
 
 const ScenarioTable: React.FC = () => {

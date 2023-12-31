@@ -14,6 +14,7 @@ export interface CreateLoadResponse {
 
 export interface Load {
   loadId?: number;
+  name: string;
   bullet: Bullet;
   muzzleVelocity: number;
   powder?: string;

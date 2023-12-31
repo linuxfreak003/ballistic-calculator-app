@@ -5,7 +5,7 @@ import {
   createLoad,
   ListLoadsRequest,
   ListLoadsResponse,
-  NewLoadForm,
+  CreateLoadRequest,
   Load,
 } from './load';
 import LoadTableBody from "./LoadTableBody"
@@ -17,20 +17,22 @@ const LoadTable: React.FC = () => {
   );
   const [error, setError] = useState<string | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [newLoadFormData, setNewLoadFormData] = useState<NewLoadForm>({
-    name: '',
-    muzzleVelocity: 0,
-    bullet: {
-      caliber: 0,
-      weight: 0,
-      bc: {
-        value: 0,
-        dragFunction: 0,
+  const [newCreateLoadRequest, setNewCreateLoadRequest] = useState<CreateLoadRequest>({
+    load: {
+      name: '',
+      muzzleVelocity: 0,
+      bullet: {
+        caliber: 0,
+        weight: 0,
+        bc: {
+          value: 0,
+          dragFunction: 0,
+        },
+        length: 0,
       },
-      length: 0,
+      powder: '',
+      powderCharge: 0,
     },
-    powder: '',
-    powderCharge: 0,
   });
 
   useEffect(() => {
@@ -63,9 +65,12 @@ const LoadTable: React.FC = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewLoadFormData({
-      ...newLoadFormData,
-      [e.target.name]: e.target.value,
+    setNewCreateLoadRequest({
+      ...newCreateLoadRequest,
+      load: {
+        ...newCreateLoadRequest.load,
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -73,7 +78,7 @@ const LoadTable: React.FC = () => {
     e.preventDefault();
 
     try {
-      await createLoad(newLoadFormData);
+      await createLoad(newCreateLoadRequest);
       closeModal();
       fetchData();
       setError(null);
@@ -92,24 +97,24 @@ const LoadTable: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <label>
             Name:
-            <input type="text" name="name" value={newLoadFormData.name} onChange={handleInputChange} />
+            <input type="text" name="name" value={newCreateLoadRequest.load.name} onChange={handleInputChange} />
           </label>
           <label>
             Muzzle Velocity (fps):
             <input
               type="text"
               name="muzzleVelocity"
-              value={newLoadFormData.muzzleVelocity}
+              value={newCreateLoadRequest.load.muzzleVelocity}
               onChange={handleInputChange}
             />
           </label>
           <label>
             Powder:
-            <input type="text" name="powder" value={newLoadFormData.powder} onChange={handleInputChange} />
+            <input type="text" name="powder" value={newCreateLoadRequest.load.powder} onChange={handleInputChange} />
           </label>
           <label>
             Powder Charge (grams):
-            <input type="text" name="powderCharge" value={newLoadFormData.powderCharge} onChange={handleInputChange} />
+            <input type="text" name="powderCharge" value={newCreateLoadRequest.load.powderCharge} onChange={handleInputChange} />
           </label>
           <button type="submit">Submit</button>
         </form>

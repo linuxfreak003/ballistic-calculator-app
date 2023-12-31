@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scenario } from './api';
+import { Scenario } from './scenario';
 
 interface ScenarioTableBodyProps {
   scenarios: Array<Scenario>;
