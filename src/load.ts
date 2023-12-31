@@ -4,12 +4,20 @@ export interface ListLoadsResponse {
   loads: Array<Load>;
 }
 
+export interface CreateLoadRequest {
+  load: Load;
+}
+
+export interface CreateLoadResponse {
+  load: Load;
+}
+
 export interface Load {
-  loadId: number;
+  loadId?: number;
   bullet: Bullet;
   muzzleVelocity: number;
-  powder: string;
-  powderCharge: number;
+  powder?: string;
+  powderCharge?: number;
 }
 
 export interface Bullet {
@@ -24,14 +32,6 @@ export interface BallisticCoefficient {
   dragFunction: number;
 }
 
-export interface NewLoadForm {
-  name: string;
-  bullet: Bullet;
-  muzzleVelocity: number;
-  powder: string;
-  powderCharge: number;
-}
-
 export async function fetchLoads(request: ListLoadsRequest): Promise<Response> {
   return fetch('http://localhost:8080/ballistic/listloads', {
     method: 'POST',
@@ -42,8 +42,8 @@ export async function fetchLoads(request: ListLoadsRequest): Promise<Response> {
   });
 }
 
-export async function createLoad(formData: NewLoadForm): Promise<Response> {
-  return fetch('http://localhost:8080', {
+export async function createLoad(formData: CreateLoadRequest): Promise<Response> {
+  return fetch('http://localhost:8080/ballistic/createload', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

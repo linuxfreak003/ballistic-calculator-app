@@ -5,18 +5,15 @@ export interface ListScenariosResponse {
 }
 
 export interface Scenario {
-  scenarioId: number;
+  scenarioId?: number;
   name: string;
   environmentId: number;
   rifleId: number;
   loadId: number;
 }
 
-export interface NewScenarioForm {
-  name: string;
-  environmentId: number;
-  rifleId: number;
-  loadId: number;
+export interface CreateScenarioRequest {
+  scenario: Scenario;
 }
 
 export async function fetchScenarios(request: ListScenariosRequest): Promise<Response> {
@@ -29,8 +26,8 @@ export async function fetchScenarios(request: ListScenariosRequest): Promise<Res
   });
 }
 
-export async function createScenario(formData: NewScenarioForm): Promise<Response> {
-  return fetch('http://localhost:8080', {
+export async function createScenario(formData: CreateScenarioRequest): Promise<Response> {
+  return fetch('http://localhost:8080/ballistic/createscenario', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

@@ -5,14 +5,10 @@ import {
   createScenario,
   ListScenariosRequest,
   ListScenariosResponse,
-  NewScenarioForm,
+  CreateScenarioRequest,
   Scenario,
 } from './api';
 import ScenarioTableBody from "./ScenarioTableBody"
-
-interface ScenarioTableProps {
-  tabId: number;
-}
 
 const ScenarioTable: React.FC = () => {
   const [scenarios, setScenarios] = useState<Array<Scenario>>([]);
@@ -21,16 +17,18 @@ const ScenarioTable: React.FC = () => {
   );
   const [error, setError] = useState<string | null>(null);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [newScenarioFormData, setNewScenarioFormData] = useState<NewScenarioForm>({
-    name: '',
-    environmentId: 0,
-    rifleId: 0,
-    loadId: 0,
+  const [newCreateScenarioRequest, setNewCreateScenarioRequest] = useState<CreateScenarioRequest>({
+    scenario: {
+      name: '',
+      environmentId: 0,
+      rifleId: 0,
+      loadId: 0,
+    },
   });
 
   useEffect(() => {
     fetchData();
-  }, [tabId]);
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -45,6 +43,7 @@ const ScenarioTable: React.FC = () => {
         setError(errorData.message || 'An error occurred');
       }
     } catch (error) {
+      console.log(error)
       setError('An error occurred while processing your request to List Scenarios:' + error);
     }
   };
@@ -58,9 +57,12 @@ const ScenarioTable: React.FC = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewScenarioFormData({
-      ...newScenarioFormData,
-      [e.target.name]: e.target.value,
+    setNewCreateScenarioRequest({
+      ...newCreateScenarioRequest,
+      scenario: {
+        ...newCreateScenarioRequest.scenario,
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -68,7 +70,7 @@ const ScenarioTable: React.FC = () => {
     e.preventDefault();
 
     try {
-      await createScenario(newScenarioFormData);
+      await createScenario(newCreateScenarioRequest);
       closeModal();
       fetchData();
       setError(null);
@@ -87,24 +89,24 @@ const ScenarioTable: React.FC = () => {
         <form onSubmit={handleSubmit}>
           <label>
             Name:
-            <input type="text" name="name" value={newScenarioFormData.name} onChange={handleInputChange} />
+            <input type="text" name="name" value={newCreateScenarioRequest.scenario.name} onChange={handleInputChange} />
           </label>
           <label>
             EnvironmentId:
             <input
               type="text"
               name="environmentId"
-              value={newScenarioFormData.environmentId}
+              value={newCreateScenarioRequest.scenario.environmentId}
               onChange={handleInputChange}
             />
           </label>
           <label>
             RifleId:
-            <input type="text" name="rifleId" value={newScenarioFormData.rifleId} onChange={handleInputChange} />
+            <input type="text" name="rifleId" value={newCreateScenarioRequest.scenario.rifleId} onChange={handleInputChange} />
           </label>
           <label>
             LoadId:
-            <input type="text" name="loadId" value={newScenarioFormData.loadId} onChange={handleInputChange} />
+            <input type="text" name="loadId" value={newCreateScenarioRequest.scenario.loadId} onChange={handleInputChange} />
           </label>
           <button type="submit">Submit</button>
         </form>
