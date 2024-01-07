@@ -34,20 +34,22 @@ export interface BallisticCoefficient {
 }
 
 export async function fetchLoads(request: ListLoadsRequest): Promise<Response> {
-  return fetch('http://localhost:8080/ballistic/listloads', {
-    method: 'POST',
+  return fetch("http://localhost:8080/ballistic/listloads", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(request),
   });
 }
 
-export async function createLoad(formData: CreateLoadRequest): Promise<Response> {
-  return fetch('http://localhost:8080/ballistic/createload', {
-    method: 'POST',
+export async function createLoad(
+  formData: CreateLoadRequest,
+): Promise<Response> {
+  return fetch("http://localhost:8080/ballistic/createload", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(formData),
   });

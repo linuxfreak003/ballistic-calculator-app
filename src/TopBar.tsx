@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface TopBarProps {
   activeTab: string;
@@ -6,14 +6,14 @@ interface TopBarProps {
 }
 
 const TopBar: React.FC<TopBarProps> = ({ activeTab, onTabChange }) => {
-  const tabs = ['ScenarioTable', 'LoadTable'];
+  const tabs = ["Scenarios", "Environments", "Rifles", "Loads"];
 
   return (
     <div className="top-bar">
       {tabs.map((tab) => (
         <div
           key={tab}
-          className={`tab ${activeTab === tab ? 'active' : ''}`}
+          className={`tab ${activeTab === tab ? "active" : ""}`}
           onClick={() => onTabChange(tab)}
         >
           {tab}

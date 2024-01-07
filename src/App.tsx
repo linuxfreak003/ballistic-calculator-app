@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import TopBar from './TopBar';
-import ScenarioTable from './ScenarioTable';
-import LoadTable from './LoadTable';
-import '@fortawesome/fontawesome-free/css/all.min.css';
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import TopBar from "./TopBar";
+import ScenarioTable from "./ScenarioTable";
+import EnvironmentTable from "./EnvironmentTable";
+import RifleTable from "./RifleTable";
+import LoadTable from "./LoadTable";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<string>('ScenarioTable');
+  const [activeTab, setActiveTab] = useState<string>("ScenarioTable");
 
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
@@ -16,8 +18,10 @@ const App: React.FC = () => {
     <div>
       <h1>Ballistic Calculator</h1>
       <TopBar activeTab={activeTab} onTabChange={handleTabChange} />
-      {activeTab === 'ScenarioTable' && <ScenarioTable />}
-      {activeTab === 'LoadTable' && <LoadTable />}
+      {activeTab === "Scenarios" && <ScenarioTable />}
+      {activeTab === "Environments" && <EnvironmentTable />}
+      {activeTab === "Rifles" && <RifleTable />}
+      {activeTab === "Loads" && <LoadTable />}
     </div>
   );
 };
