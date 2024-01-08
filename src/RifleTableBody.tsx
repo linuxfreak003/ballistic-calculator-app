@@ -11,6 +11,10 @@ const RifleTableBody: React.FC<RifleTableBodyProps> = ({ rifles }) => {
       <thead>
         <tr>
           <th>ID</th>
+          <th>Name</th>
+          <th>Sight Height (in)</th>
+          <th>Barrel Twist (in)</th>
+          <th>Twist Direction Left</th>
           <th>Zero Range</th>
         </tr>
       </thead>
@@ -18,6 +22,10 @@ const RifleTableBody: React.FC<RifleTableBodyProps> = ({ rifles }) => {
         {rifles.map((item) => (
           <tr key={item.rifleId}>
             <td>{item.rifleId}</td>
+            <td>{item.name}</td>
+            <td>{item.sightHeight}</td>
+            <td>{item.barrelTwist}</td>
+            <td>{item.twistDirectionLeft}</td>
             <td>{item.zeroRange}</td>
           </tr>
         ))}
