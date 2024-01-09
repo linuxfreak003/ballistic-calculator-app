@@ -5,6 +5,7 @@ import ScenarioTable from "./ScenarioTable";
 import EnvironmentTable from "./EnvironmentTable";
 import RifleTable from "./RifleTable";
 import LoadTable from "./LoadTable";
+import Solver from "./Solver";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const App: React.FC = () => {
@@ -22,6 +23,7 @@ const App: React.FC = () => {
       {activeTab === "Environments" && <EnvironmentTable />}
       {activeTab === "Rifles" && <RifleTable />}
       {activeTab === "Loads" && <LoadTable />}
+      {activeTab === "Solver" && <Solver />}
     </div>
   );
 };

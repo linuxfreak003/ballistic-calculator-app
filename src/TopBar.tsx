@@ -6,7 +6,7 @@ interface TopBarProps {
 }
 
 const TopBar: React.FC<TopBarProps> = ({ activeTab, onTabChange }) => {
-  const tabs = ["Scenarios", "Environments", "Rifles", "Loads"];
+  const tabs = ["Scenarios", "Environments", "Rifles", "Loads", "Solver"];
 
   return (
     <div className="top-bar">
