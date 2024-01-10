@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { solveTable } from "./solve";
+import {
+  solveTable,
+  SolveTableResponse,
+  Solution,
+} from "./solve";
 import {
   fetchScenarios,
   ListScenariosRequest,
   ListScenariosResponse,
   Scenario,
 } from "./scenario";
+import SolutionTableBody from "./SolutionTableBody";
 
 const Solver: React.FC = () => {
   // State for form input values
@@ -14,12 +19,13 @@ const Solver: React.FC = () => {
   const [includeCoriolis, setIncludeCoriolis] = useState<boolean>(false);
   const [maxRange, setMaxRange] = useState<number>(0);
   const [increment, setIncrement] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null);
 
   // State for the list of scenarios
   const [scenarios, setScenarios] = useState<Array<Scenario>>([]);
 
   // State for the solved data
-  const [solvedData, setSolvedData] = useState<any>(null);
+  const [solutions, setSolutions] = useState<Array<Solution>>([]);
 
   // Fetch the list of scenarios on component mount
   useEffect(() => {
@@ -44,18 +50,31 @@ const Solver: React.FC = () => {
   // Handle form submission
   const handleSolve = async () => {
     // Check if a scenario is selected before attempting to solve
+    console.log("handleSolve called");
+    console.log(scenarioId);
     if (scenarioId !== null) {
       try {
         // Call the solving method with the form inputs
-        const result = await solveTable({
+        const response = await solveTable({
           scenarioId,
           includeSpinDrift,
           includeCoriolis,
           maxRange,
           increment,
         });
-        setSolvedData(result); // Update the state with the solved data
+        if (response.ok) {
+          const responseData: SolveTableResponse = await response.json();
+          setSolutions(responseData.solutions); // Update the state with the solved data
+          setError(null);
+        } else {
+          const errorData = await response.json();
+          setError(errorData.message || "An error occurred");
+        }
       } catch (error) {
+        setError(
+          "An error occurred while processing your request to List Environments:" +
+            error,
+        );
         console.error("Error solving scenario:", error);
       }
     } else {
@@ -100,7 +119,7 @@ const Solver: React.FC = () => {
           />
         </label>
         <label>
-          Range:
+          Max Range:
           <input
             type="number"
             value={maxRange}
@@ -108,7 +127,7 @@ const Solver: React.FC = () => {
           />
         </label>
         <label>
-          Range:
+          Increment:
           <input
             type="number"
             value={increment}
@@ -119,11 +138,12 @@ const Solver: React.FC = () => {
           Solve
         </button>
       </form>
-      {solvedData && (
+
+      {error && <p style={{ color: "red" }}>{error}</p>}
+      {solutions.length > 0 && (
         <div>
-          <h3>Solved Data</h3>
-          {/* Display the solved data in a table or as needed */}
-          <pre>{JSON.stringify(solvedData, null, 2)}</pre>
+          <h3>Solution</h3>
+          <SolutionTableBody solutions={solutions} />
         </div>
       )}
     </div>

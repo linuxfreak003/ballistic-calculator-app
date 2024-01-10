@@ -7,7 +7,7 @@ export interface SolveTableRequest {
 }
 
 export interface SolveTableResponse {
-  solution: Array<Solution>;
+  solutions: Array<Solution>;
 }
 
 export interface SolveRequest {
