@@ -118,6 +118,77 @@ const EnvironmentTable: React.FC = () => {
               onChange={handleInputChange}
             />
           </label>
+          <label>
+            Altitude (ft):
+            <input
+              type="text"
+              name="altitude"
+              value={newCreateEnvironmentRequest.environment.altitude}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Pressure (hPa):
+            <input
+              type="text"
+              name="pressure"
+              value={newCreateEnvironmentRequest.environment.pressure}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Humidity (%):
+            <input
+              type="text"
+              name="humidity"
+              value={newCreateEnvironmentRequest.environment.humidity}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Wind Angle (deg):
+            <input
+              type="text"
+              name="windAngle"
+              value={newCreateEnvironmentRequest.environment.windAngle}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Wind Speed (mph):
+            <input
+              type="text"
+              name="windSpeed"
+              value={newCreateEnvironmentRequest.environment.windSpeed}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Pressure Is Absolute?:
+            <input
+              type="checkbox"
+              checked={newCreateEnvironmentRequest.environment.pressureIsAbsolute}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Latitude:
+            <input
+              type="text"
+              name="latitude"
+              value={newCreateEnvironmentRequest.environment.latitude}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Azimuth:
+            <input
+              type="text"
+              name="azimuth"
+              value={newCreateEnvironmentRequest.environment.azimuth}
+              onChange={handleInputChange}
+            />
+          </label>
           <button type="submit">Submit</button>
         </form>
       </Modal>

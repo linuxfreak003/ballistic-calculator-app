@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  solveTable,
-  SolveTableResponse,
-  Solution,
-} from "./solve";
+import { solveTable, SolveTableResponse, Solution } from "./solve";
 import {
   fetchScenarios,
   ListScenariosRequest,

@@ -103,6 +103,24 @@ const RifleTable: React.FC = () => {
             />
           </label>
           <label>
+            Sight Height (in):
+            <input
+              type="text"
+              name="sightHeight"
+              value={newCreateRifleRequest.rifle.sightHeight}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
+            Barrel Twist (in):
+            <input
+              type="text"
+              name="barrelTwist"
+              value={newCreateRifleRequest.rifle.barrelTwist}
+              onChange={handleInputChange}
+            />
+          </label>
+          <label>
             Zero Range (yrds):
             <input
               type="text"
