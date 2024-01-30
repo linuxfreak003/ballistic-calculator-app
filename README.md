@@ -1,13 +1,19 @@
-## Running React on Repl.it
+## Ballistic Calculator App
 
-[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces.
+The Ballistic Calculator App is a front end
+for the `ballistic-calculator` service.
 
-[Vite](https://vitejs.dev/) is a blazing fast frontend build tool that includes features like Hot Module Reloading (HMR), optimized builds, and TypeScript support out of the box.
+It provides methods for Listing and Adding
 
-Using the two in conjunction is one of the fastest ways to build a web app.
+* `Rifle`
+* `Load`
+* `Environment`
+
+Which combine to create a `Scenario`, that is used by the Solver to calculate trajectory tables.
 
 ### Getting Started
-- Hit run
-- Edit [App.tsx](#src/App.tsx) and watch it live update!
 
-By default, Replit runs the `dev` script, but you can configure it by changing the `run` field in the [configuration file](#.replit). Here are the vite docs for [serving production websites](https://vitejs.dev/guide/build.html)
+* Clone Repo
+* Run `npm install`
+* Run `npm run build`
+* Run `npm run preview`
