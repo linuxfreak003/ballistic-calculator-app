@@ -117,7 +117,7 @@ const Solver: React.FC = () => {
         <label>
           Max Range:
           <input
-            type="number"
+            type="text"
             value={maxRange}
             onChange={(e) => setMaxRange(Number(e.target.value))}
           />
@@ -125,7 +125,7 @@ const Solver: React.FC = () => {
         <label>
           Increment:
           <input
-            type="number"
+            type="text"
             value={increment}
             onChange={(e) => setIncrement(Number(e.target.value))}
           />

@@ -20,15 +20,15 @@ const LoadTable: React.FC = () => {
     useState<CreateLoadRequest>({
       load: {
         name: "",
-        muzzleVelocity: 0,
+        muzzleVelocity: 2600,
         bullet: {
-          caliber: 0,
-          weight: 0,
+          caliber: 0.308,
+          weight: 155,
           bc: {
-            value: 0,
-            dragFunction: 0,
+            value: 0.25,
+            dragFunction: "DRAG_FUNCTION_G7",
           },
-          length: 0,
+          length: 1.5,
         },
         powder: "",
         powderCharge: 0,
@@ -68,13 +68,47 @@ const LoadTable: React.FC = () => {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setNewCreateLoadRequest({
-      ...newCreateLoadRequest,
+    const { name, value } = e.target;
+
+    setNewCreateLoadRequest((prev) => ({
+      ...prev,
       load: {
-        ...newCreateLoadRequest.load,
-        [e.target.name]: e.target.value,
+        ...prev.load,
+        [name]: value,
       },
-    });
+    }));
+  };
+
+  const handleBulletInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setNewCreateLoadRequest((prev) => ({
+      ...prev,
+      load: {
+        ...prev.load,
+        bullet: {
+          ...prev.load.bullet,
+          [name]: value,
+        },
+      },
+    }));
+  };
+  const handleBCInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setNewCreateLoadRequest((prev) => ({
+      ...prev,
+      load: {
+        ...prev.load,
+        bullet: {
+          ...prev.load.bullet,
+          bc: {
+            ...prev.load.bullet.bc,
+            [name]: value,
+          },
+        },
+      },
+    }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -125,7 +159,7 @@ const LoadTable: React.FC = () => {
               type="text"
               name="caliber"
               value={newCreateLoadRequest.load.bullet.caliber}
-              onChange={handleInputChange}
+              onChange={handleBulletInputChange}
             />
           </label>
           <label>
@@ -134,7 +168,7 @@ const LoadTable: React.FC = () => {
               type="text"
               name="weight"
               value={newCreateLoadRequest.load.bullet.weight}
-              onChange={handleInputChange}
+              onChange={handleBulletInputChange}
             />
           </label>
           <label>
@@ -143,7 +177,7 @@ const LoadTable: React.FC = () => {
               type="text"
               name="length"
               value={newCreateLoadRequest.load.bullet.length}
-              onChange={handleInputChange}
+              onChange={handleBulletInputChange}
             />
           </label>
           <label>
@@ -152,7 +186,7 @@ const LoadTable: React.FC = () => {
               type="text"
               name="value"
               value={newCreateLoadRequest.load.bullet.bc.value}
-              onChange={handleInputChange}
+              onChange={handleBCInputChange}
             />
           </label>
           <label>
@@ -161,7 +195,7 @@ const LoadTable: React.FC = () => {
               type="text"
               name="dragFunction"
               value={newCreateLoadRequest.load.bullet.bc.dragFunction}
-              onChange={handleInputChange}
+              onChange={handleBCInputChange}
             />
           </label>
           <label>

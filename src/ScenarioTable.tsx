@@ -52,6 +52,28 @@ const ScenarioTable: React.FC = () => {
     fetchData();
   }, []);
 
+  // Fetch the list of scenarios
+  const fetchData = async () => {
+    try {
+      const response = await fetchScenarios(newListScenariosRequest);
+
+      if (response.ok) {
+        const responseData: ListScenariosResponse = await response.json();
+        setScenarios(responseData.scenarios);
+        setError(null);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || "An error occurred");
+      }
+    } catch (error) {
+      console.log(error);
+      setError(
+        "An error occurred while processing your request to List Scenarios:" +
+          error,
+      );
+    }
+  };
+
   // Fetch the list of loads on component mount
   useEffect(() => {
     // Fetch the list of loads and update the state
@@ -111,27 +133,6 @@ const ScenarioTable: React.FC = () => {
 
     fetchEnvironmentsList();
   }, []);
-
-  const fetchData = async () => {
-    try {
-      const response = await fetchScenarios(newListScenariosRequest);
-
-      if (response.ok) {
-        const responseData: ListScenariosResponse = await response.json();
-        setScenarios(responseData.scenarios);
-        setError(null);
-      } else {
-        const errorData = await response.json();
-        setError(errorData.message || "An error occurred");
-      }
-    } catch (error) {
-      console.log(error);
-      setError(
-        "An error occurred while processing your request to List Scenarios:" +
-          error,
-      );
-    }
-  };
 
   const openModal = () => {
     setSelectedScenario(null);
@@ -217,6 +218,7 @@ const ScenarioTable: React.FC = () => {
           <label>
             Environment:
             <select
+              name="environmentId"
               value={newCreateScenarioRequest.scenario.environmentId || ""}
               onChange={handleInputChange}
             >
@@ -236,6 +238,7 @@ const ScenarioTable: React.FC = () => {
           <label>
             Rifle:
             <select
+              name="rifleId"
               value={newCreateScenarioRequest.scenario.rifleId || ""}
               onChange={handleInputChange}
             >
@@ -252,6 +255,7 @@ const ScenarioTable: React.FC = () => {
           <label>
             Load:
             <select
+              name="loadId"
               value={newCreateScenarioRequest.scenario.loadId || ""}
               onChange={handleInputChange}
             >
