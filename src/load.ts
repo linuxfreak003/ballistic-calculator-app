@@ -30,7 +30,7 @@ export interface Bullet {
 
 export interface BallisticCoefficient {
   value: number;
-  dragFunction: number;
+  dragFunction: string;
 }
 
 export async function fetchLoads(request: ListLoadsRequest): Promise<Response> {
