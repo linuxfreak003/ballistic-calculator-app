@@ -24,7 +24,7 @@ export interface Rifle {
 export async function fetchRifles(
   request: ListRiflesRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/listrifles", {
+  return fetch(host + "/ballistic/listrifles", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ export async function fetchRifles(
 export async function createRifle(
   formData: CreateRifleRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/createrifle", {
+  return fetch(host + "/ballistic/createrifle", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

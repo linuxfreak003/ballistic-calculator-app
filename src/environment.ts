@@ -29,7 +29,7 @@ export interface Environment {
 export async function fetchEnvironments(
   request: ListEnvironmentsRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/listenvironments", {
+  return fetch(host + "/ballistic/listenvironments", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -41,7 +41,7 @@ export async function fetchEnvironments(
 export async function createEnvironment(
   formData: CreateEnvironmentRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/createenvironment", {
+  return fetch(host + "/ballistic/createenvironment", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

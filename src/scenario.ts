@@ -27,7 +27,7 @@ export interface DeleteScenarioRequest {
 export async function fetchScenarios(
   request: ListScenariosRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/listscenarios", {
+  return fetch(host + "/ballistic/listscenarios", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export async function fetchScenarios(
 export async function createScenario(
   formData: CreateScenarioRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/createscenario", {
+  return fetch(host + "/ballistic/createscenario", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -51,7 +51,7 @@ export async function createScenario(
 export async function updateScenario(
   formData: UpdateScenarioRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/updatescenario", {
+  return fetch(host + "/ballistic/updatescenario", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -63,7 +63,7 @@ export async function updateScenario(
 export async function deleteScenario(
   formData: DeleteScenarioRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/deletescenario", {
+  return fetch(host + "/ballistic/deletescenario", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

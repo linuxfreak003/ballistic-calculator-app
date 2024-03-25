@@ -1,3 +1,5 @@
+import Config from "./api";
+
 export interface ListLoadsRequest {}
 
 export interface ListLoadsResponse {
@@ -34,7 +36,7 @@ export interface BallisticCoefficient {
 }
 
 export async function fetchLoads(request: ListLoadsRequest): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/listloads", {
+  return fetch(host + "/ballistic/listloads", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -46,7 +48,7 @@ export async function fetchLoads(request: ListLoadsRequest): Promise<Response> {
 export async function createLoad(
   formData: CreateLoadRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/createload", {
+  return fetch(host + "/ballistic/createload", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,3 +1,5 @@
+import host from "./api";
+
 export interface SolveTableRequest {
   scenarioId: number;
   includeSpinDrift: boolean;
@@ -38,7 +40,7 @@ export interface Solution {
 export async function solveTable(
   request: SolveTableRequest,
 ): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/solvetable", {
+  return fetch(host + "/ballistic/solvetable", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -48,7 +50,7 @@ export async function solveTable(
 }
 
 export async function solve(formData: SolveRequest): Promise<Response> {
-  return fetch("http://localhost:8080/ballistic/solve", {
+  return fetch(host + "/ballistic/solve", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
