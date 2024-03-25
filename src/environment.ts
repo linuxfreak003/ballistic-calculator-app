@@ -1,3 +1,5 @@
+import { host } from "./config";
+
 export interface ListEnvironmentsRequest {}
 
 export interface ListEnvironmentsResponse {

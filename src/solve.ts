@@ -1,4 +1,4 @@
-import host from "./api";
+import { host } from "./config";
 
 export interface SolveTableRequest {
   scenarioId: number;

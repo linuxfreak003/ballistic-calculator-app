@@ -1,3 +1,5 @@
+import { host } from "./config";
+
 export interface ListRiflesRequest {}
 
 export interface ListRiflesResponse {

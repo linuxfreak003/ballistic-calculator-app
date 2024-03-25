@@ -1,4 +1,4 @@
-import Config from "./api";
+import { host } from "./config";
 
 export interface ListLoadsRequest {}
 
